@@ -21,10 +21,10 @@ export const index = async (req: Request, res: Response) => {
 };
 
 export const indexByNgo = async (req: Request, res: Response) => {
-  const ngo_id = req.headers.authorization;
+  const { id } = req.params;
   const incidents = await connection("incidents")
     .select("*")
-    .where("ngo_id", ngo_id);
+    .where("ngo_id", id);
   return res.json(incidents);
 };
 
