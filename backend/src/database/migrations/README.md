@@ -1,0 +1,1 @@
+Check http://knexjs.org/#Installation-migrations to know how to create the migrations.
