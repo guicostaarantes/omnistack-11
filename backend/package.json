@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "test": "jest",
+    "test": "cross-env NODE_ENV=test jest",
+    "test-deploy": "cross-env NODE_ENV=staging jest",
     "build": "tsc -p tsconfig-build.json",
     "prod": "cross-env NODE_ENV=production node ./build/src/server.js",
     "build-prod": "npm run build && npm run prod"

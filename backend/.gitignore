@@ -1,5 +1,6 @@
 **/*/.DS_Store
-.env
+*.env
+!example.env
 build
 node_modules
-dev.sqlite3
+*.sqlite3

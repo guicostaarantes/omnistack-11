@@ -1,5 +1,6 @@
-import dotenv from "dotenv";
-dotenv.config();
+import env from "./env";
+
+env();
 
 export const development = {
   client: "sqlite3",

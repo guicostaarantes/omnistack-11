@@ -1,15 +1,15 @@
-import dotenv from "dotenv";
-dotenv.config();
-
+import env from "../env";
 import express from "express";
-import ngoRoutes from "./routes/NgoRoutes";
-import incidentRoutes from "./routes/IncidentRoutes";
+import NgoRoutes from "./routes/NgoRoutes";
+import IncidentRoutes from "./routes/IncidentRoutes";
+
+env();
 
 const app = express();
 
 app.use(express.json());
 
-app.use(ngoRoutes);
-app.use(incidentRoutes);
+app.use(NgoRoutes);
+app.use(IncidentRoutes);
 
 export default app;
