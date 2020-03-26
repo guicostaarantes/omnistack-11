@@ -32,11 +32,12 @@ export default function Profile() {
     history.push("/");
   }
 
+  async function getIncidents() {
+    const response = await api.get(`ngo/${ngoId}/incidents`);
+    setIncidents(response.data);
+  }
+
   useEffect(() => {
-    const getIncidents = async () => {
-      const response = await api.get(`ngo/${ngoId}/incidents`);
-      setIncidents(response.data);
-    };
     getIncidents();
   }, [ngoId]);
 

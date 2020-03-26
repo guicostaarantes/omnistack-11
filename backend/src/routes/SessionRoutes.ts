@@ -3,6 +3,6 @@ import * as sessionController from "../controllers/SessionController";
 
 const routes = express.Router();
 
-routes.post("/session", sessionController.create);
+routes.post("/ngo/session", sessionController.ngoCreate);
 
 export default routes;

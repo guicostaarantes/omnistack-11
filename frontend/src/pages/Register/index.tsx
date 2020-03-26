@@ -12,6 +12,8 @@ export default function Register() {
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [uf, setUf] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const history = useHistory();
 
@@ -22,12 +24,13 @@ export default function Register() {
       email,
       phone,
       city,
-      uf
+      uf,
+      password
     };
-
     try {
+      if (password !== password2) throw new Error("Passwords do not match.");
       const response = await api.post("ngo", data);
-      alert(`Seu ID de acesso: ${response.data.id}`);
+      alert("ONG criada com sucesso.");
       history.push("/");
     } catch (err) {
       alert("Erro no cadastro, tente novamente.");
@@ -79,6 +82,18 @@ export default function Register() {
               style={{ width: 80 }}
             />
           </div>
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            placeholder="Senha"
+          />
+          <input
+            type="password"
+            value={password2}
+            onChange={e => setPassword2(e.target.value)}
+            placeholder="Confirmar senha"
+          />
           <button className="button" type="submit">
             Cadastrar
           </button>

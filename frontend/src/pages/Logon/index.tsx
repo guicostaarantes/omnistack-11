@@ -8,7 +8,8 @@ import { Link, useHistory } from "react-router-dom";
 import api from "../../services/api";
 
 export default function Logon() {
-  const [id, setId] = useState("");
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
 
   const history = useHistory();
 
@@ -16,9 +17,12 @@ export default function Logon() {
     event.preventDefault();
 
     try {
-      const response = await api.post("session", { id });
-      localStorage.setItem("ngoId", id);
-      localStorage.setItem("ngoName", response.data.name);
+      console.log(emailOrPhone, password);
+      const response = await api.post("ngo/session", {
+        emailOrPhone,
+        password
+      });
+      localStorage.setItem("token", response.data.token);
       history.push("/profile");
     } catch (err) {
       alert("Falha no login, tente novamente.");
@@ -30,11 +34,17 @@ export default function Logon() {
       <section className="form">
         <img src={logoSvg} alt="Logo" />
         <form onSubmit={handleLogin}>
-          <h1>Faça seu logon</h1>
+          <h1>Entrar</h1>
           <input
-            value={id}
-            onChange={e => setId(e.target.value)}
-            placeholder="Sua ID"
+            value={emailOrPhone}
+            onChange={e => setEmailOrPhone(e.target.value)}
+            placeholder="Email ou telefone"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            placeholder="Senha"
           />
           <button className="button" type="submit">
             Entrar

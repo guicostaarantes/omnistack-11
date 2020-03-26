@@ -30,7 +30,7 @@ export const indexByNgo = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
   const { title, description, value } = req.body;
-  const ngo_id = req.headers.authorization;
+  const ngo_id = req.userId;
   const [id] = await connection("incidents").insert({
     ngo_id,
     title,
