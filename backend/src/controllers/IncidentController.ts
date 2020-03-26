@@ -43,15 +43,18 @@ export const create = async (req: Request, res: Response) => {
 
 export const del = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const ngo_id = req.headers.authorization;
 
   const incident = await connection("incidents")
     .select("ngo_id")
     .where("id", id)
     .first();
 
-  if (ngo_id !== incident.ngo_id) {
-    return res.status(401).json({ err: "Operation not allowed." });
+  if (!incident) {
+    return res.status(404).json({ err: "Not Found." });
+  }
+
+  if (req.userId !== incident.ngo_id) {
+    return res.status(401).json({ err: "Unauthorized." });
   }
 
   await connection("incidents")
